@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <top-bar></top-bar>
+    <top-header></top-header>
   </div>
 </template>
 
 <script>
 import TopBar from './components/Topbar'
-import Icon from 'vue-awesome/components/Icon'
+import TopHeader from './components/TopHeader'
 
 export default {
   components: {
     'top-bar': TopBar,
-    'Icon': Icon
+    'top-header':TopHeader
   }
 }
 </script>

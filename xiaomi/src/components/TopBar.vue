@@ -17,11 +17,13 @@
         <a href="http://order.mi.com/site/login?redirectUrl=http://www.mi.com/index.html" class="parting">登录</a>
         <a href="https://account.xiaomi.com/pass/register">注册</a>
       </div>
-      <div class="topbar-cart">
+      <div class="topbar-cart" :class="{'active':cartStatus}" @mouseover="evtCartEnter" @mouseout="evtCartOut">
         <a href="javascript:;"><icon name="cart-plus"></icon>购物车（<span>0</span>）</a>
-        <div class="cart-list">
-          购物车中还没有商品，赶快选购吧！
-        </div>
+        <transition name="fadein">
+          <div class="cart-list" v-if="cartStatus">
+            购物车中还没有商品，赶快选购吧！
+          </div>
+        </transition>
       </div>
     </div>
   </header>
@@ -52,14 +54,16 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick( () =>{
-      
+    this.$nextTick( () =>{    
     })
   },
   methods:{
-      init(){
-
-      }
+    evtCartEnter(){
+      this.cartStatus = true;
+    },
+    evtCartOut(){
+      this.cartStatus = false
+    }
   }
 }
 </script>
@@ -147,12 +151,6 @@ export default {
      font-size: 14px;
      vertical-align: middle
    }
-   &:hover{
-     color:#ff6700;
-     .fa-icon{
-      color:#ff6700;
-     }
-   }
   }
   .cart-list{
     position: absolute;
@@ -163,10 +161,33 @@ export default {
     box-shadow: 0 0 5px #ccc;
     text-align: center;
     line-height: 96px;
+    overflow: hidden;
   }
 }
 .active{
   background: #fff;
-  
+  a{
+    color:#ff6700;
+   .fa-icon{
+      color:#ff6700;
+    }
+  }
 }
+.fadein-enter-active{
+  animation: slide-in .5s;
+}
+.fadein-leave-active{
+  animation: slide-in .5s reverse;
+}
+@keyframes slide-in {
+  0%{
+    
+    height: 0;
+  }
+  100%{
+    height: 96px;
+    
+  }
+}
+
 </style>
