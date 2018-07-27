@@ -162,6 +162,8 @@ export default {
     text-align: center;
     line-height: 96px;
     overflow: hidden;
+    z-index: 13;
+    background: #fff;
   }
 }
 .active{
