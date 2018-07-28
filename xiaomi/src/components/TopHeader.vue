@@ -554,7 +554,7 @@
 
   .menus {
     max-width: 1500px;
-    padding: 30px 0 0 150px;
+    padding: 30px 0 0 80px;
   }
 
   .product {
@@ -563,10 +563,10 @@
     font-size: 12px;
     a {
       display: inline-block;
-      padding: 0 30px;
+      padding: 0 20px;
       border-left: 1px solid #ccc;
       img{
-        width: 160px;
+        width: 150px;
         height: 110px;
       }
     }
