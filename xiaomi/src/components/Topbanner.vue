@@ -1,20 +1,22 @@
 <template>
   <div class="banner-top">
-    <ul class="sidebar-sort">
-      <li v-for="item in sideItems" :key="item.type" class="sort-item" @mouseover="evtMouseover(item.type)" >{{item.content}}</li>
-    </ul>
-    <div class="sidebar-sort-box"  @mouseleave="evtMouseout()">
-      <ul class="sidebar-sort-info" v-for="(item,index) in filterCurrGoods" :key="index" v-show="goodsStatus">
-        <li v-for="goods in item" :key="goods.name">
-          <a class="product-link" :href="goods.sourceUrl">
-            <img :src="goods.imgUrl">
-            <span>{{goods.name}}</span>
-          </a>
-          <a :href="goods.buyUrl" v-if="goods.buyStatus===true" class="product-buy-link">选购</a>
-        </li>
-      </ul>  
-    </div>
-    <slide :banner="banners"></slide>
+		<div class="sidebar-sort-wrap"  @mouseleave="evtSlideOut()" >
+			<ul class="sidebar-sort">
+				<li v-for="item in sideItems" :key="item.type" class="sort-item" @mouseover="evtSlideEnter(item.type)" >{{item.content}}</li>
+			</ul>
+			<div class="sidebar-sort-box" v-show="goodsStatus">
+				<ul class="sidebar-sort-info" v-for="(item,index) in filterCurrGoods" :key="index" >
+					<li v-for="goods in item" :key="goods.name">
+						<a class="product-link" :href="goods.sourceUrl">
+							<img :src="goods.imgUrl">
+							<span>{{goods.name}}</span>
+						</a>
+						<a :href="goods.buyUrl" v-if="goods.buyStatus===true" class="product-buy-link">选购</a>
+					</li>
+				</ul>  
+			</div>
+		</div>
+    <slide :banners="banners"></slide>
   </div> 
 </template>
 <script>
@@ -167,11 +169,11 @@ export default {
     }
   },
   methods:{
-    evtMouseover(type){
-      this.currGoods=this[type];
-      this.goodsStatus=true;
+    evtSlideEnter(type){
+      this.currGoods=this[type]
+      this.goodsStatus=true
     },
-    evtMouseout(){
+    evtSlideOut(){
       this.goodsStatus=false
     }
   }
@@ -180,7 +182,7 @@ export default {
 <style lang="scss" scoped>
 .banner-top{
   width: 1226px;
-  height: 420px;
+  height: 460px;
   margin: 0 auto;
   position: relative;
 }
@@ -191,18 +193,19 @@ export default {
 }
 .sidebar-sort{
   width: 235px;
-  height: 420px;
+  height: 460px;
   background: rgba(0, 0, 0, 0.3);
   padding: 20px 0;
   box-sizing: border-box;
   position: absolute;
+	z-index: 10;
 }
 .sort-item{
   text-align: center;
   color: #fff;
   font-size: 14px;
-  height: 38px;
-  line-height: 38px;
+  height: 42px;
+  line-height: 42px;
   cursor: pointer;
   &:hover{
     background: #ff6700;
@@ -210,7 +213,7 @@ export default {
 }
 
 .sidebar-sort-box{
-  height: 420px;
+  height: 460px;
   border: 1px solid #ccc;
   box-shadow: 0 0 5px #ccc;
   position: absolute;
