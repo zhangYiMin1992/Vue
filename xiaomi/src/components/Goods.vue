@@ -1,13 +1,16 @@
 <template>
     <div class="goods-container">
         <goods-top-box></goods-top-box>
+        <goods-parts></goods-parts>
     </div>
 </template>
 <script>
 import GoodsTopBox from './GoodsTopBox'
+import GoodsParts from './GoodsParts'
 export default {
     components:{
-        'goods-top-box':GoodsTopBox
+        'goods-top-box': GoodsTopBox,
+        'goods-parts': GoodsParts
     }
 }
 </script>
