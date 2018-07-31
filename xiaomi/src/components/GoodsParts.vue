@@ -2,7 +2,7 @@
 <div class="around-container clearfix">
     <goods-top :topTitle="topTitle"
                :subs="subs"
-               @:evtTap="evtHanderTab(keys)">
+               @evtTab="evtHanderTab">
     </goods-top> 
 
     <goods-left :leftGoods="leftGoods"></goods-left>
@@ -113,8 +113,8 @@ export default {
         init(){
             this.currGoods = this.hotGoods
         },
-        evtHanderTab(Key){
-            this.currGoods = this[Key]
+        evtHanderTab(key){
+           this.currGoods = this[key]
         }
     }
 }

@@ -21,28 +21,29 @@
                 </div>
             </li>   
         </template>
-        <template>
-            <ul class="goods-small-list">
-                <li class="goods-small-item">
-                    <a href="">
-                        <div class="goods-info">
-                            <h3>小米蓝牙耳机</h3>
-                            <p>99元</p>
-                        </div>
-                        <img src="//i2.mifile.cn/a1/T12HJvByEv1RXrhCrK.jpg?width=150&height=150" alt="">
-                    </a>
-                </li>
-                <li class="goods-small-item read-more">
-                    <a href="">
-                        <div class="goods-info">
-                            <h3>浏览更多</h3>
-                            <p>热门</p>
-                        </div>
-                        <div class="icons"><icon name="arrow-circle-right" width="60" height="60"></icon></div>
-                    </a>
-                </li>
-            </ul>
-        </template>
+        
+        <ul class="goods-small-list">
+            <template v-if="lastGoods">
+            <li class="goods-small-item">
+                <a :href="lastGoods.sourceUrl" target="_blank">
+                    <div class="goods-info">
+                        <h3>{{lastGoods.title}}</h3>
+                        <p>{{lastGoods.price}}元</p>
+                    </div>
+                    <img :src="lastGoods.imgUrl" alt="">
+                </a>
+            </li>
+            <li class="goods-small-item read-more">
+                <a :href="lastGoods.moreUrl" target="_blank">
+                    <div class="goods-info">
+                        <h3>浏览更多</h3>
+                        <p>热门</p>
+                    </div>
+                    <div class="icons"><icon name="arrow-circle-right" width="60" height="60"></icon></div>
+                </a>
+            </li>
+            </template>
+        </ul>    
     </ul>
 </template>
 <script>
@@ -54,7 +55,7 @@
         },
         data(){
             return{
-                currGoods:this.currGoods
+                //currGoods:this.currGoods
             }
         },
         props:{
@@ -79,7 +80,6 @@
     float: left;
     height: 100%;
     width: 992px;
-    overflow: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -172,10 +172,6 @@
     height: 260px;
     cursor: pointer;
     margin-left: 14px;
-    &:hover{
-        box-shadow:5px 5px 20px #ccc;
-        transform: translateY(-1px);
-    }
     .goods-small-item{
         height: 143px;
         width: 234px;
@@ -183,6 +179,10 @@
         box-sizing: border-box;
         margin-bottom: 14px;
         background: #fff;
+        &:hover{
+            box-shadow:5px 5px 20px #ccc;
+            transform: translateY(-1px);
+        }
         a{
             display: block;
             .goods-info{

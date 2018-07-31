@@ -1,13 +1,13 @@
 <template>
     <ul class="left-wrap">
-        <li v-for="item in goods" :key="item.imgUrl"><a :href="item.sourceUrl"><img :src="item.imgUrl" alt=""></a></li>
+        <li v-for="item in leftGoods" :key="item.imgUrl"><a :href="item.sourceUrl"><img :src="item.imgUrl" alt=""></a></li>
     </ul>
 </template>
 <script>
 export default {
     data(){
         return{
-            goods: this.leftGoods
+           // goods: this.leftGoods
         }
     },
     props: {
@@ -23,7 +23,6 @@ export default {
     width: 234px;
     height: 100%;
     float:left;
-    overflow: hidden;
     li{
         width: 100%;
         height: 300px;

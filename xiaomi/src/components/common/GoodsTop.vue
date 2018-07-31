@@ -2,7 +2,7 @@
     <div class="top-box">
         <a class="title">{{Title}}</a>
         <ul class="tab-list">
-            <li v-for="(item,index) in Subs" :key="item.name" :class="{'m-hover':idx===index}" @mouseover="evtHover(index),$emit('evtTab',item.key)"><span>{{item.name}}</span></li>
+            <li v-for="(item,index) in Subs" :key="item.name" :class="{'m-hover':idx===index}" @mouseover="evtHover(index,item.key)"><span>{{item.name}}</span></li>
         </ul>
     </div>  
 </template>
@@ -26,8 +26,9 @@ export default {
         }
     },
     methods:{
-        evtHover(Idx){
+        evtHover(Idx,keys){
             this.idx = Idx
+            this.$emit('evtTab',keys)
         }
     }
 }
