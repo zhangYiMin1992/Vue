@@ -2,8 +2,8 @@
     <div class="content-wrap">
         <h2 class="title book">图书</h2>
         <div class="slide-wrap">                         
-            <a href="javascript:;" class="prev menu"><icon width='30' height="35" name="chevron-left"></icon></a>
-            <a href="javascript:;" class="next menu"><icon width='30' height="35" name="chevron-right"></icon></a>
+            <a href="javascript:;" class="prev menu"><icon width='35' height="40" name="chevron-left"></icon></a>
+            <a href="javascript:;" class="next menu"><icon width='35' height="40" name="chevron-right"></icon></a>
             <ul class="content-list clearfix">
                 <li class="list-item">
                     <a href="">
