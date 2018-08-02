@@ -3,8 +3,8 @@
         <div class="wrap">
             <goods-header :title="title"></goods-header>
             <ul class="content-list clearfix">
-                <li>
-                    <goods-content-slide></goods-content-slide>
+                <li v-for="(item,index) in contents" :key="index">                 
+                    <goods-content-slide  :content="item"></goods-content-slide> 
                 </li>
             </ul>         
         </div>
@@ -81,6 +81,11 @@ export default {
     .content-list{
         li{
             float: left;
+            margin-left: 14px;
+            &:nth-child(1){
+                margin-left: 0;
+            }
         }
+
     }
 </style>

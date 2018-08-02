@@ -1,38 +1,20 @@
 <template>
-    <div class="content-wrap">
-        <h2 class="title book">图书</h2>
+    <div class="content-wrap" :class="myContent.type">
+        <h2 class="title">{{myContent.title}}</h2>
         <div class="slide-wrap">                         
-            <a href="javascript:;" class="prev menu"><icon width='35' height="40" name="chevron-left"></icon></a>
-            <a href="javascript:;" class="next menu"><icon width='35' height="40" name="chevron-right"></icon></a>
-            <ul class="content-list clearfix">
-                <li class="list-item">
-                    <a href="">
-                        <span class="subTitle">哈利波特与魔法石</span>
-                        <p class="desc">哈利波特来了</p>
-                        <img src='//i3.mifile.cn/a4/8e3584b6-3169-41c6-9356-939ec79aac2b' alt="">
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="">
-                        <h3 class="subTitle">哈利波特与魔法石</h3>
-                        <p class="desc">哈利波特来了</p>
-                        <p class="price">限时免费</p>
-                        <img src='//i3.mifile.cn/a4/8e3584b6-3169-41c6-9356-939ec79aac2b' alt="">
-                    </a>
-                </li>
-                <li class="list-item">
-                    <p class="desc">哈利波特来了</p>
-                    <a href="">
-                        <p class="btn-text">哈利波特来了</p>
-                        <img src='//i3.mifile.cn/a4/8e3584b6-3169-41c6-9356-939ec79aac2b' alt="">
+            <a href="javascript:;" class="prev menu" @click="evtSlide(-1)"><icon name="chevron-left"></icon></a>
+            <a href="javascript:;" class="next menu" @click="evtSlide(+1)"><icon name="chevron-right"></icon></a>
+            <ul class="content-list clearfix" :style="{'margin-left':this.currPage * (-296) +`px`}">
+                <li class="list-item" v-for="item in myContent.list" :key="item.sourceUrl">
+                    <a :href="item.sourceUrl">
+                        <span class="subTitle">{{item.title}}</span>
+                        <p class="desc">{{item.desc}}</p>
+                        <img :src="item.imgUrl" alt="">
                     </a>
                 </li>
             </ul>
             <ul class="dot-list clearfix">
-                <li class="select"><span></span></li>
-                <li><span></span></li>
-                <li><span></span></li>
-                <li><span></span></li>
+                <li v-for="(item,index) in myContent.list" :key="index" :class="{'select':currPage===index}"><span></span></li>
             </ul>
         </div>
     </div>   
@@ -43,8 +25,35 @@
     export default {
         components: {
             Icon
-        } 
-}
+        },
+        props:{
+            content:{
+                type:Object,
+                required:true
+            }
+        },
+        data(){
+            return{
+                currPage: 0,
+                myContent: this.content
+            }
+        },
+        mounted(){
+            this.$nextTick(()=>{
+                
+            })
+        },
+        methods:{
+            evtSlide(dir){
+                if(dir < 0 && this.currPage > 0){
+                    this.currPage--                
+                }
+                else if(dir > 0 && this.currPage < this.myContent.list.length - 1){
+                    this.currPage++
+                }               
+            }
+        }
+    }
 </script>
 <style lang="scss" scoped>
     .content-wrap{
@@ -54,6 +63,15 @@
         padding-top: 45px;
         margin:0 0 14px 14px;
         position: relative;
+        transition: all 0.3s ease;
+        &:hover{
+            transform: translateY(-1px);
+            box-shadow: 5px 5px 20px #ccc;
+            .menu{
+                background: #ccc;
+                z-index: 10; 
+            }    
+        }
         &:nth-child(1){
             margin-left: 0;
         }
@@ -67,22 +85,48 @@
         }
 
     }
+    .book{
+        border-top: 1px solid #ffac13;
+        .title{
+            color:#ffac13;
+        }
+    }
+    .theme{
+        border-top: 1px solid #83c44e;
+        .title{
+            color:#83c44e;
+        }
+    }
+    .game{
+        border-top: 1px solid #e53935;
+        .title{
+            color:#e53935;
+        }
+    }
+    .app{
+        border-top: 1px solid #2196f3;
+        .title{
+            color:#2196f3;
+        }
+    }
     .slide-wrap{
         width: 296px;
         height: 340px;
         overflow: hidden;
+        transition: all 0.5s ease;
         .menu{
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             display: block;
-            background: #ccc;
-            width: 20px;
+            background: #fff;
+            width: 25px;
             height: 45px;
             .fa-icon{
-                width: 10px;
-                height: 10px;
+                width: 12px;
+                height: 16px;
                 color: #fff;
+                margin:14px 0 0 5px;
             }
         }
         .prev{
@@ -93,7 +137,8 @@
         }
     }
     .content-list{
-        width: auto;
+        width: 400%;
+        transition: all 0.5s ease;
     }
     .list-item{
         width: 296px;
@@ -101,6 +146,7 @@
         background: #fff;
         float: left;
         text-align: center;
+        transition: all 0.5s ease;
         .subTitle{
             font-weight: normal;
             font-size: 20px;
@@ -133,10 +179,12 @@
                 background: #ccc;
                 border-radius: 100%;
                 border: 2px solid #fff;
+                transition: all 0.5s ease;
             }
         }
         .select{
             span{
+                transition: all 0.5s ease;
                 background: #fff;
                 border: 2px solid #ff6700;
             }
